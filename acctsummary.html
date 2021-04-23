@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.min.css">
+  	<link rel="stylesheet" type="text/css" href="css/bootstrap/accountstyle.css">
+    <script  src="js/bootstrap/jquery-3.4.1.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+	<script  src="js/bootstrap/bootstrap.min.js"></script> 
+  <script type="text/javascript" src="script.js"></script>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title></title>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12" style="margin-top:5%">
+            <div>
+                Transaction Accounts
+            </div>
+            <div>
+                <table  border="1" style="width:100%;height: 100px;" align="center">
+                    <tr>
+                        <th>Account No/ Nick Name</th>
+                        <th>Branch</th>
+                        <th>Available Balance</th>
+                        
+                    </tr>
+                    <tr>
+                        <td id="acctname"></td>
+                        <td id="branch"></td>
+                         <td id="balance"></td>   <!--<a href="">check here for balance</a> -->
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid" style="margin-top:5%">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <h3>Instructions</h3>
+            <p style="color:black;font-size: 15px">If you have any hidden accounts, please unhide through the tab profile > manage A/c Display > unHide Accounts or unhide 
+                debits accounts.
+            </p>
+            <p style="color:black;font-size: 15px">
+                Capital gains plus accounts can be viewed under deposit Accounts.
+            </p>
+        </div>
+    </div>
+
+</div>
+</body>
+<script>
+var acctname=localStorage.getItem("currentuser");
+document.getElementById("acctname").innerHTML=acctname;
+
+var branch=localStorage.getItem("currentbranch");
+document.getElementById("branch").innerHTML=branch;
+
+var balance=localStorage.getItem("currentbalance");
+document.getElementById("balance").innerHTML=balance;
+</script>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.min.css">
+  	<link rel="stylesheet" type="text/css" href="css/bootstrap/accountstyle.css">
+    <script  src="js/bootstrap/jquery-3.4.1.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+	<script  src="js/bootstrap/bootstrap.min.js"></script> 
+  <script type="text/javascript" src="script.js"></script>
+
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <script>
+    function updatepwd(){
+        var flag=1;
+        var existpwd=document.getElementById("existpwd").value;
+        var newpwd=document.getElementById("newpwd").value;
+        var repwd=document.getElementById("repwd").value;
+        var userdb=JSON.parse(localStorage.getItem("userdb"));
+        var pwdregex= /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+        if(existpwd==""){
+            document.getElementById("perr").innerHTML="Enter Existing Password";
+            flag=0;
+            return false;
+        }
+        else{
+            document.getElementById("perr").innerHTML="";
+            flag=1;
+        }
+        if(newpwd==""){
+            document.getElementById("nperr").innerHTML="Enter new password";
+            flag=0;
+            return false;
+        }
+        if(!pwdregex.test(document.getElementById("newpwd").value)){
+            console.log("validation");
+            document.getElementById("nperr").innerHTML="Enter valid password !Password should contain atleast 1 Uppercase,1 Special character and number!";
+            flag=0;
+            return false;
+        }
+        else{
+            document.getElementById("nperr").innerHTML="";
+            flag=1;
+        }
+        if(repwd==""){
+        
+            document.getElementById("reperr").innerHTML="Enter Password";
+            flag=0;
+            return false;
+        }
+        else{
+            document.getElementById("reperr").innerHTML="";
+            flag=1;
+        }
+
+        if(flag==1){
+            var ssid=sessionStorage.getItem("userId");
+            console.log(ssid);
+            if(existpwd==userdb[ssid].pwd){
+                for(i=0;i<userdb.length;i++){
+            if(existpwd==userdb[i].pwd)
+            {
+                setpwd();
+                document.getElementById("perr").innerHTML=" ";
+            }
+            else{
+                document.getElementById("perr").innerHTML="Password mismatching";
+            }
+        }
+        }
+            else{
+                alert("Enter correct password");
+                return false;
+            }
+            
+        }
+    }
+    function setpwd(){
+        var existpwd=document.getElementById("existpwd").value;
+        var newpwd=document.getElementById("newpwd").value;
+        var repwd=document.getElementById("repwd").value;
+        var userdb=JSON.parse(localStorage.getItem("userdb"));
+    if(newpwd==repwd){
+        document.getElementById("perr").innerHTML="";
+        for(i=0;i<userdb.length;i++){
+
+            if(existpwd==userdb[i].pwd){
+                userdb[i].pwd=newpwd;
+            }
+        }
+        localStorage.setItem("userdb",JSON.stringify(userdb));
+        alert("password changed");
+    }
+      
+        else{
+            alert("password didnot match");
+        }
+    }
+     </script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 col-xs-12 col-sm-12">
+         <h3>  Change password </h3>
+        </div>
+        <div class="col-md-12 col-xs-12 col-sm-12">
+                <form>
+                        <div class="form-group">
+                          <label for="existpwd">Existing Password:</label>
+                          <input type="password" class="form-control" id="existpwd" placeholder="Enter Password" name="existpwd">
+                          <span id="perr" style="color:red"></span>
+                        </div>
+                        <div class="form-group" style="color:black; ">
+                          <label for="newpwd">New Password:</label>
+                          <input type="password" class="form-control" id="newpwd" placeholder="New Password" name="newpwd">
+                          <span id="nperr" style="color:red"></span>
+                        </div>
+
+                        <div class="form-group" style="color:black; ">
+                            <label for="repwd">Re-enter New Password:</label>
+                            <input type="password" onpaste = "return false" class="form-control" id="repwd" placeholder="Re-enter New Password" name="renewpwd">
+                            <span id="reperr" style="color:red"></span>
+                          </div>
+                        <button type="button"  onclick="updatepwd()">Submit</button>
+                      </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.min.css">
+  	<link rel="stylesheet" type="text/css" href="css/bootstrap/accountstyle.css">
+    <script  src="js/bootstrap/jquery-3.4.1.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+	<script  src="js/bootstrap/bootstrap.min.js"></script> 
+  <script type="text/javascript" src="script.js"></script>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title></title>
+    <style>
+      .active, .btn:hover {
+  background-color: #666;
+  color: white;
+}
+    </style>
+</head>
+
+<body onload="loadpage()">
+        <div class="container-fluid">
+                <div class="row">
+                        <nav class="navbar navbar-inverse navbar-static-top" style="background-color: #4b3c8e">
+                                <div class="container">
+                                  <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar3">
+                                      <span class="sr-only">Toggle navigation</span>
+                                      <span class="icon-bar"></span>
+                                      <span class="icon-bar"></span>
+                                      <span class="icon-bar"></span>
+                                    </button>
+                                    <a href="#"><img src="image/logo2.png" width="100" height="50" alt="logo">
+                                    </a>
+                                  </div>
+                                  <div id="navbar3" class="navbar-collapse collapse">
+                                    <ul class="nav navbar-nav navbar-right">
+                                            <li><a href="index.html" style="color:white"><span class="glyphicon glyphicon-home"></span> Starling Home</a></li>
+                                            <li><a href="#" style="color:white">About online Starling</a></li>
+                                            <li><a href="#" style="color:white">Forms</a></li>
+                                            <li><a href="#" style="color:white">Net banking branches</a></li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </nav>
+                </div>
+            </div>
+    <div class="container-fluid">
+<div class="row">
+<marquee><b>You can also use bank using mobile application."STARLING ANYWHERE"<span>
+        WELCOME TO INTERNET BANKING</b>
+</span> </marquee> 
+</div>
+    </div>
+<div class="container-fluid" >
+    <div class="row myDIV" style="background-color: #4b3c8e;" >
+        <div class="col-md-2 col-sm-6 menu"  align="center">
+                <a href="">
+                        <!-- <img src="image/account.png" width="35%"> -->
+                        <p class="" >My Account and Profile</p> 
+                </a> 
+        </div>
+        <div class="col-md-2 col-sm-6 menu" align="center">
+            <a href="leftnavpayment.html" target="leftnavbar">
+                <!-- <img src="image/payment.png" width="35%" > -->
+                <p class="">payment/Transfer </p> </a>  
+        </div>
+        <div class="col-md-2 col-sm-6 menu" align="center">
+                
+                <a href="bill.html" target="rightcontent">
+                        <!-- <img src="image/bill.png" width="35%"> -->
+                        <p class="">Bill Payment
+                        </p>
+                </a href="">
+        </div>
+        <div class="col-md-2 col-sm-6 menu" align="center">
+              <a href="">
+                    <!-- <img src="image/tax.png" width="35%"> -->
+               
+                    <p class="">e-tax
+                    </p>
+              </a>  
+        </div>
+   
+        <div class="col-md-2 col-sm-6 menu" align="center">
+            <a href="">
+                    <!-- <img src="image/ques.png" width="35%"> -->
+                    <p class="">Enquiries
+                    </p>
+            </a>    
+        </div>
+        <div class="col-md-2 col-sm-6 menu" align="center" >
+            
+                        <ul class="nav navbar-nav navbar-right logout" style="margin-right: 3%">
+                                <li>
+                                    <a href="login.html" data-toggle="modal" data-target="#logoutModal" id="logout">logout <i class="glyphicon glyphicon-log-out"></i></a>
+                                </li>
+                            </ul>
+                          </div>
+                          
+                        </div>
+             </nav>
+                  <!-- Small modal -->
+                  <div class="modal" id="logoutModal" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                          <h4>Log Out </h4>
+                        </div>
+                        <div class="modal-body">
+                          <h5><i class="fa fa-question-circle"></i> Are you sure you want to log-off? <br /></h5>
+                          <div class="actionsBtns">
+                              <form method="post">
+                                  <input type="button" class="btn btn-default btn-primary" data-dismiss="modal" value="Logout" onClick="logout()">
+                                    <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+                              </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+    
+              
+            </div>
+
+    </div>
+ </div>
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-12" style="border: 1px solid black;height: 70px;">
+<h4>
+  Welcome
+<span id="username" style="color: #4b3c8e;font-weight: 900"></span>   <span id="date"></span> </h4>
+  
+
+</div>
+</div>
+</div>
+<div class="container-fluid" style="padding:0px">
+  <div class="row" style="border:1px solid black">
+    <div class="col-md-3 col-xs-12 col-sm-12 frameleft">
+        <iframe class="leftframe" src="leftnav.html"
+        name="leftnavbar" height="655px" width="100%" style="border:0px solid black;background-color: #4b3c8e" ></iframe>
+    </div>
+    <div class="col-md-9 col-xs-12 col-sm-12">
+        <iframe class="rightframe" src="" name="rightcontent" height="655px" width="100%" style="border:0px solid black;"></iframe>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+</body>
+<script>
+var today = new Date();
+var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+var dateTime = date+' '+time;
+document.getElementById("date").innerHTML=dateTime;
+var name=localStorage.getItem("currentuser");
+document.getElementById("username").innerHTML=name;
+</script>
+</html>

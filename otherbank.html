@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.min.css">
+  	<link rel="stylesheet" type="text/css" href="css/bootstrap/accountstyle.css">
+    <script  src="js/bootstrap/jquery-3.4.1.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+	<script  src="js/bootstrap/bootstrap.min.js"></script> 
+  <script type="text/javascript" src="script.js"></script>
+
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <style>
+        span{
+            color:red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+<div class="row">
+<div class="col-md-12" >
+<h3>Other Bank Transfer</h3>
+</div>
+</div>
+    </div>
+<div class="container-fluid">
+    <div class="row">
+       
+            <form class="form-horizontal">
+           
+            <div class="form-group">
+              <label class="control-label col-sm-4" for="bacct">Acct no:</label>
+              <div class="col-sm-6">          
+                <input type="text" class="form-control" id="acct" maxlength="14" placeholder="Enter Account" name="bacct">
+              </div>
+              <div class="col-sm-2">
+                    <span id="accterr"></span>
+            </div>
+            </div>
+            <div class="form-group">
+                    <label class="control-label col-sm-4" for="reacct">Re-enter  Acct no:</label>
+                    <div class="col-sm-6">          
+                      <input type="text" onpaste = "return false" class="form-control" maxlength="14" id="reacct" placeholder="Enter Account" name="rebacct">
+            </div>
+            <div class="col-sm-2">
+                    <span id="reaccterr"></span>
+            </div>
+            </div>
+            <div class="form-group" id="ifs">
+                    <label class="control-label col-sm-4" for="ifsc">IFSC:</label>
+                    <div class="col-sm-6">          
+                      <input type="text" class="form-control" id="ifsc" placeholder="Enter IFSC Code" name="ifsc">
+            </div>
+            <div class="col-sm-2">
+                    <span id="ifscerr"></span>
+            </div>
+            </div>
+       
+       
+            <div class="form-group">
+                    <label class="control-label col-sm-4" for="amount">Amount:</label>
+                    <div class="col-sm-6">          
+                      <input type="text" class="form-control"  id="amount" placeholder="Enter Amount" name="amount">
+            </div>
+            <div class="col-sm-2">
+                    <span id="amterr"></span>
+            </div>
+            </div>
+
+            <div class="form-group">
+            <div class="col-sm-4">
+                  
+            </div>
+            <div class="col-sm-4">
+                <span id="bprpserr"></span>
+            </div>
+            <div class="col-sm-4">
+
+            </div>
+            </div>
+
+ <div class="container-fluid">
+        <div class="row" id="Beneficiary" style="display: none;">
+                <div style="color:black;"><h3>Add Beneficiary</h3></div>
+                <div  style="color:black;"><h3>TO Send more than 5000 you have to add benificiary</h3></div>
+                 <form class="form-horizontal">
+                       
+               
+              <div class="form-group">
+                    <label class="control-label col-sm-4" for="bname">Beneficiary Name:</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" id="bname" placeholder="Enter name" name="bname">
+                    </div>
+                    <div class="col-sm-2">
+                          <span id="bnameerr"></span>
+                  </div>
+                </div>
+                <div class="form-group">
+                        <label class="control-label col-sm-4" for="bacct">Beneficiary Acct no:</label>
+                        <div class="col-sm-6">          
+                          <input type="text" class="form-control" id="bacct" maxlength="14" placeholder="Enter Account" name="bacct">
+                        </div>
+                        <div class="col-sm-2">
+                              <span id="baccterr"></span>
+                      </div>
+                      </div>
+                      <div class="form-group">
+                              <label class="control-label col-sm-4" for="rebacct">Re-enter Beneficiary Acct no:</label>
+                              <div class="col-sm-6">          
+                                <input type="text" onpaste = "return false" class="form-control" maxlength="14" id="rebacct" placeholder="Enter Account" name="rebacct">
+                      </div>
+                      <div class="col-sm-2">
+                              <span id="breaccterr"></span>
+                      </div>
+                      </div>
+             
+                <div class="form-group"> 
+                    <div class="col-sm-4">
+    
+                    </div>       
+                  <div class="col-sm-2 ">
+                    <button type="button" onclick="save()">Save</button>
+                    
+                  </div>
+                  <div class="col-sm-4">
+                        
+                  </div>
+                </div>
+        
+                     </form>
+</div>
+</div>
+
+            <div class="form-group"> 
+                <div class="col-sm-4">
+
+                </div>       
+              <div class="col-sm-2 ">
+                <button  type="button" onclick="transfer()" id="button">Transfer</button>
+                
+              </div>
+              <div class="col-sm-4">
+                    <button type="button">Cancel</button>
+              </div>
+            </div>
+          </form>
+    </div>
+</div>
+</body>
+<script>
+  
+function save(){
+    var bename=document.getElementById("bname").value;
+        var beacct=document.getElementById("bacct").value;
+        var bereacct=document.getElementById("rebacct").value;
+
+          var namereg = new RegExp("[^a-zA-Z]");
+        var acctreg=/^\d{14}$/;
+ if(bename==""){
+            document.getElementById("bnameerr").innerHTML="Enter the name";
+            flag=0;
+            return false;
+        }
+        if(namereg.test(document.getElementById("bname").value)){
+            document.getElementById("bnameerr").innerHTML="Enter the valid name";
+            flag=0;
+            return false;
+        }
+        else{
+            document.getElementById("bnameerr").innerHTML="";
+            flag=1;
+        }
+
+
+        if(beacct==""){
+            document.getElementById("baccterr").innerHTML="Enter the acctno";
+            flag=0;
+            return false;
+        }
+        if(!acctreg.test(document.getElementById("acct").value)){
+            document.getElementById("baccterr").innerHTML="Enter the valid acctno";
+            flag=0;
+            return false;
+        }
+        else{
+            document.getElementById("baccterr").innerHTML="";
+            flag=1;
+    }
+
+     if(bereacct==""){
+            document.getElementById("breaccterr").innerHTML="Enter the acctno";
+            flag=0;
+            return false;
+        }
+        
+        if(beacct!=bereacct){
+            document.getElementById("breaccterr").innerHTML="Acctno is mismatching";
+            flag=0;
+            return false;            
+            
+        }
+        else{
+
+            document.getElementById("breaccterr").innerHTML="";
+            flag=1;
+        }
+
+
+alert("saving details.....! you can transfer after 5 seconds");
+
+
+
+
+
+
+    $("#button").attr("disabled", "disabled");
+                        setTimeout(function() {
+                            $("#button").removeAttr("disabled");
+                        }, 5000)
+}
+
+
+
+
+    var accountname,accountnum,uid,accountHolderifsc;
+    function transfer(){
+        var availbal=JSON.parse(localStorage.getItem("currentbalance"));
+    // document.getElementById("Beneficiary").style.display="none";
+    var flag=1;
+    var acctno=document.getElementById("acct").value;
+    var reacctno=document.getElementById("reacct").value;
+    var amount=document.getElementById("amount").value;
+    amount = Math.round(amount * 100)/100;
+    console.log(amount);
+    var ifsc=document.getElementById("ifsc").value;
+    var ifscreg = /[A-Z|a-z]{4}[0][\d]{6}$/ ; 
+    var amtreg=  /^[0-9]+(\.[0-9]{1,2})?$/;;
+    var acctreg=/^\d{14}$/;
+    if(acctno==""){
+            document.getElementById("accterr").innerHTML="Enter the acctno";
+            flag=0;
+            return false;
+        }
+        if(!acctreg.test(document.getElementById("acct").value)){
+            document.getElementById("accterr").innerHTML="Enter the valid acctno";
+            flag=0;
+            return false;
+        }
+        else{
+            document.getElementById("accterr").innerHTML="";
+            flag=1;
+    }
+
+     if(reacctno==""){
+            document.getElementById("reaccterr").innerHTML="Enter the acctno";
+            flag=0;
+            return false;
+        }
+        
+        if(acctno!=reacctno){
+            document.getElementById("reaccterr").innerHTML="Acctno is mismatching";
+            flag=0;
+            return false;            
+            
+        }
+        else{
+
+            document.getElementById("reaccterr").innerHTML="";
+            flag=1;
+        }
+
+        if(ifsc==""){
+            document.getElementById("ifscerr").innerHTML="Enter the ifsc code";
+            flag=0;
+            return false;
+        }
+        if(!ifscreg.test(document.getElementById("ifsc").value)){
+            document.getElementById("ifscerr").innerHTML="Enter valid ifsc code";
+            flag=0;
+            return false;
+        }
+        else{
+            document.getElementById("ifscerr").innerHTML="";
+            flag=1;
+}
+        
+
+    
+        if(amount==""){
+            document.getElementById("amterr").innerHTML="Enter the Amount";
+            flag=0;
+            return false;
+        }
+        if((!(amtreg.test(amount)))){ 
+            document.getElementById("amterr").innerHTML="Enter the valid Amount";
+            flag=0;
+            return false;
+        }
+        if(amount < 0 ){
+            document.getElementById("amterr").innerHTML="Invalid Amount";    
+                return false;
+                flag=0;
+        }
+        if(amount>availbal){
+                document.getElementById("amterr").innerHTML="insuffi amt";    
+                return false;
+                flag=0;
+         }
+         else{
+
+            document.getElementById("amterr").innerHTML="";
+            flag=1;
+            }
+if(flag==1){
+    if(amount>5000){
+      
+
+            // alert("To send amount more than 5000 you should be Add some Beneficiary's");
+            document.getElementById("Beneficiary").style.display="block";
+        var bename=document.getElementById("bname").value;
+        var beacct=document.getElementById("bacct").value;
+        var bereacct=document.getElementById("rebacct").value;
+        var namereg = new RegExp("[^a-zA-Z]");
+        var acctreg=/^\d{14}$/;
+        var ifsc=document.getElementById("ifsc").value;
+    var ifscreg = /[A-Z|a-z]{4}[0][\d]{6}$/ ; 
+        if(bename==""){
+            document.getElementById("bnameerr").innerHTML="Enter the name";
+            flag=0;
+            return false;
+        }
+        if(namereg.test(document.getElementById("bname").value)){
+            document.getElementById("bnameerr").innerHTML="Enter the valid name";
+            flag=0;
+            return false;
+        }
+        else{
+            document.getElementById("bnameerr").innerHTML="";
+            flag=1;
+        }
+
+
+        if(beacct==""){
+            document.getElementById("baccterr").innerHTML="Enter the acctno";
+            flag=0;
+            return false;
+        }
+        if(!acctreg.test(document.getElementById("acct").value)){
+            document.getElementById("baccterr").innerHTML="Enter the valid acctno";
+            flag=0;
+            return false;
+        }
+        else{
+            document.getElementById("baccterr").innerHTML="";
+            flag=1;
+    }
+
+     if(bereacct==""){
+            document.getElementById("breaccterr").innerHTML="Enter the acctno";
+            flag=0;
+            return false;
+        }
+        
+        if(bereacct!=beacct){
+            document.getElementById("breaccterr").innerHTML="Acctno is mismatching";
+            flag=0;
+            return false;            
+            
+        }
+        else{
+
+            document.getElementById("breaccterr").innerHTML="";
+            flag=1;
+        }
+    
+if(flag==1){
+    var ssid=sessionStorage.getItem("userId");
+  
+        var userdb=JSON.parse(localStorage.getItem("userdb"));
+for(var i=0;i<userdb.length;i++){
+    if(bename === userdb[i].name)
+                    {
+                    if(beacct == userdb[i].acct && beacct==bereacct && ifsc == userdb[i].ifsc)
+                    {
+                        document.getElementById("breaccterr").innerHTML="";
+                    accountname =bename;
+                    accountnum = beacct;
+                    uid = i;
+                    console.log(uid);
+                    }
+                    else{
+                    document.getElementById("breaccterr").innerHTML="enter correct name and acctno and check ifsc";
+                    return false;
+                }
+                }
+}
+if(accountname === undefined){
+                document.getElementById("bnameerr").innerHTML="enter correct name";
+                    return false;
+            }
+            // transfered amount
+    var bal = parseFloat(userdb[uid].balance);
+    amount = parseFloat(amount);
+    bal =amount+bal;
+    userdb[uid].balance = bal;
+    localStorage.setItem("userdb",JSON.stringify(userdb));
+    
+    var receiver=userdb[uid].name;
+    var amt=document.getElementById("amount").value;
+    
+    var branch=userdb[uid].bankname;
+    
+    localStorage.setItem("bank",branch);
+    localStorage.setItem("amtreceiver",receiver);
+    localStorage.setItem("amount",amt);
+    // current user
+    var currentuserbal = parseFloat(userdb[ssid].balance);
+    currentuserbal = currentuserbal - amount;
+    userdb[ssid].balance = currentuserbal;
+    localStorage.setItem("userdb",JSON.stringify(userdb)); 
+    
+    var sendnme=userdb[ssid].name;
+    var sendbank=userdb[ssid].bankname;
+    localStorage.setItem("sendname",sendnme);
+    localStorage.setItem("senderbank",sendbank);
+    sessionStorage.setItem("transferedUserid",uid);
+    
+    var availablebalance=userdb[ssid].balance;
+    localStorage.setItem("avabal",availablebalance)
+    
+    window.open("result.html","rightcontent")
+      
+                
+}
+        
+          
+
+}
+        
+else{
+    var ssid=sessionStorage.getItem("userId");
+        var userdb=JSON.parse(localStorage.getItem("userdb"));
+    for(var i=0;i<userdb.length;i++){
+        if(acctno === userdb[i].acct)
+                    {
+                    if(ifsc == userdb[i].ifsc && acctno==reacctno)
+                    {
+                    document.getElementById("bprpserr").innerHTML="";
+                    accountnum = acctno;
+                    uid = i;
+                    console.log(uid);
+                    }
+                    else{
+                    document.getElementById("bprpserr").innerHTML="enter correct ifsc and acctno";
+                    return false;
+                }
+                }
+
+  
+            }
+            console.log(uid);
+          
+            // transfered amount
+    var bal = parseFloat(userdb[uid].balance);
+    amount = parseFloat(amount);
+    bal = amount+bal;
+    userdb[uid].balance = bal;
+    localStorage.setItem("userdb",JSON.stringify(userdb));
+    
+    var receiver=userdb[uid].name;
+    var amt=document.getElementById("amount").value;
+    
+    var branch=userdb[uid].bankname;
+    
+    localStorage.setItem("bank",branch);
+    localStorage.setItem("amtreceiver",receiver);
+    localStorage.setItem("amount",amt);
+    // current user
+    var currentuserbal = parseFloat(userdb[ssid].balance);
+    currentuserbal = currentuserbal - amount;
+    userdb[ssid].balance = currentuserbal;
+    localStorage.setItem("userdb",JSON.stringify(userdb)); 
+    
+    var sendnme=userdb[ssid].name;
+    var sendbank=userdb[ssid].bankname;
+    localStorage.setItem("sendname",sendnme);
+    localStorage.setItem("senderbank",sendbank);
+    sessionStorage.setItem("transferedUserid",uid);
+    
+    var availablebalance=userdb[ssid].balance;
+    localStorage.setItem("avabal",availablebalance)
+    
+    window.open("result.html","rightcontent")
+}
+
+}
+}   
+
+</script>
+</html>
